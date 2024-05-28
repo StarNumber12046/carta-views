@@ -1,6 +1,14 @@
 import argparse
 
-from carta import ReMarkable, Widget
+from myapp.classes import reMarkable
+from myapp.views.ExampleView import ExampleView
+
+
+def quit_hook(clicked):
+    
+    if clicked and clicked[0] == "exit":
+            return "exit"
+
 
 
 def main():
@@ -17,30 +25,16 @@ def main():
     )
     args = parser.parse_args()
 
-    rm = ReMarkable(simple=args.simple) if args.simple is not None else ReMarkable()
+    rm = reMarkable(simple=args.simple) if args.simple is not None else reMarkable()
 
     rm.eclear()
-
-    button = Widget(
-        id="back",
-        typ="button",
-        value="back",
-        justify="left",
-        x="0",
-        y="0",
-    )
-    text = Widget(
-        id="hello",
-        typ="label",
-        value="Hello World!",
-        x="50%",
-        y="50%",
-    )
-    rm.add(text)
-    rm.add(button)
-
+    
+    rm.update_view(ExampleView(rm))
+    print("Updated base view")
     while True:
         clicked = rm.display()
-        if clicked and clicked[0] == button.id:
-            print("Quitting...")
+        if quit_hook(clicked) == "exit":
             break
+        
+        rm.view.handle_buttons(clicked) # type: ignore
+

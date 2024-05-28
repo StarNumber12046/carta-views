@@ -6,6 +6,7 @@ reMarkable Template Python Carta Application
 - [.github/workflows/build.yml](.github/workflows/build.yml) - Workflow to build, package, and test the app
 - [myapp/\_\_init\_\_.py](myapp/__init__.py) - Main import of the application. The main method gets run on startup.
 - [myapp/\_\_main\_\_.py](myapp/__main__.py) - Main entrypoint of the application when used as a python module.
+- [myapp/views/\*.py](myapp/views/) - Directory containing app views
 - [myapp.py](myapp.py) - Main entrypoint of the application when compiled with [nuitka](https://nuitka.net/) to create the binary executable.
 - [myapp.oxide](myapp.oxide) - [Oxide application registration](https://oxide.eeems.codes/documentation/03_application_registration_format.html).
 - [package](package) - [Toltec package recipe](https://github.com/toltec-dev/toltec/blob/stable/docs/package.md) to create a package that can be installed on the device.
@@ -36,3 +37,18 @@ You can now copy the contents of this folder to your device, and run your app wi
 pip install -r ./requirements.txt
 python -m myapp
 ```
+
+Creating Views
+==============
+
+A view is an instance of `BaseView`. An example can be found in [myapp/views/ExampleView.py]
+
+Passing data thru views
+=======================
+
+`additional_args` is a dictionary containing additional arguments (or state) to be passed to a new view
+
+Handling buttons
+================
+
+An example of buttons handling can be found in [views/ExampleView.py]
