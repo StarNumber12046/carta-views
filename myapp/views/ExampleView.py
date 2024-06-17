@@ -6,7 +6,7 @@ from carta import Widget
 class ExampleView(BaseView):
     def __init__(self, reMarkable: reMarkable, additional_args: dict = {}) -> None:
         super().__init__(reMarkable, additional_args)
-        self.hooks["example_button"] = self.click_me
+        self.hooks["example_*"] = self.click_me
         pass
 
     def display(self):

@@ -1,4 +1,5 @@
 from carta import ReMarkable
+import fnmatch
 
 from myapp.classes import reMarkable
 
@@ -13,7 +14,7 @@ class BaseView(object):
         pass
     
     def handle_buttons(self, clicked): # Clicked is a tuple, the docs are wrong
-        for hook in self.hooks.keys():
-            if clicked and clicked[0] == hook:
-                self.hooks[hook](clicked)
+        valid_hooks = [self.hooks[x] for x in self.hooks.keys() if fnmatch.fnmatch(clicked[0], x)]
+        for hook in valid_hooks:
+            hook(clicked)
             
